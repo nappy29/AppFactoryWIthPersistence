@@ -13,11 +13,11 @@ interface AlbumDao {
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(album: Album)
+    suspend fun insertAlbum(album: Album): Long
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(albums: List<Album>)
+    suspend fun insertAllAlbums(albums: List<Album>)
 
     @Transaction
     @Delete

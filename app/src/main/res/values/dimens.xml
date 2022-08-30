@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding">15dp</dimen>
+    <dimen name="padding_80">90dp</dimen>
+    <dimen name="padding7dp">7dp</dimen>
+    <dimen name="padding5dp">5dp</dimen>
+    <dimen name="padding8dp">8dp</dimen>
+</resources>

@@ -8,11 +8,11 @@ interface TrackDao {
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(track: Track)
+    suspend fun insertTrack(track: Track)
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(tracks: List<Track>)
+    suspend fun insertAllTracks(tracks: List<Track>)
 
     @Transaction
     @Delete

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.appfactorytest.ui.mainPage.MainFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/main_fragment_page" >
+
+        <action
+            android:id="@+id/action_mainFragment_to_artistListFragment"
+            app:destination="@id/artistListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/artistListFragment"
+        android:name="com.example.appfactorytest.ui.ArtistSearchFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/artist_list_fragment" >
+
+        <action
+            android:id="@+id/action_artistListFragment_to_topAlbumFragment2"
+            app:destination="@id/topAlbumFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/topAlbumFragment"
+        android:name="com.example.appfactorytest.ui.TopAlbumFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/artist_list_fragment" >
+
+        <action
+            android:id="@+id/action_topAlbumFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.appfactorytest.ui.ArtistSearchFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/details_fragment" >
+    </fragment>
+
+
+</navigation>

@@ -1,6 +1,6 @@
 package com.example.appfactorytest.data.remote
 
-import com.example.appfactorytest.data.model.AlbutTracksApiResponse
+import com.example.appfactorytest.data.model.AlbumAndTracksApiResponse
 import com.example.appfactorytest.data.model.ArtistSearchApiResponse
 import com.example.appfactorytest.data.model.TopAlbumApiResponse
 import retrofit2.Response
@@ -18,6 +18,6 @@ interface ApiService {
 
     @GET("?method=album.getinfo&format=json")
     suspend fun getAlbumTracks(@Query("artist", encoded = true) artistName: String,
-                               @Query("album", encoded = true) albumName: String): Response<AlbutTracksApiResponse>
+                               @Query("album", encoded = true) albumName: String): Response<AlbumAndTracksApiResponse>
 
 }

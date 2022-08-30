@@ -12,6 +12,6 @@ data class ArtistResults(
 )
 
 data class ArtistMatches(
-    @SerializedName("album")
-    var albums: List<Album>
+    @SerializedName("artist")
+    var artists: List<Artist>
 )

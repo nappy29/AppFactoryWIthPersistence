@@ -8,13 +8,13 @@ interface ArtistDao {
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(artist: Artist)
+    suspend fun insertArtist(artist: Artist)
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(artists: List<Artist>)
+    suspend fun insertAllArtists(artists: List<Artist>)
 
     @Transaction
     @Delete
-    suspend fun deleteTrack(artist: Artist)
+    suspend fun deleteArtist(artist: Artist)
 }

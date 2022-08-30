@@ -8,6 +8,9 @@ import com.example.appfactorytest.data.local.dao.ArtistDao
 import com.example.appfactorytest.data.local.dao.TrackDao
 import com.example.appfactorytest.data.local.db.AlbumDatabase
 import com.example.appfactorytest.data.remote.ApiService
+import com.example.appfactorytest.util.NetworkHelper
+import com.example.appfactorytest.viewmodel.repository.RepositoryHelper
+import com.example.appfactorytest.viewmodel.repository.RepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -100,4 +103,13 @@ class AppModule {
     @Provides
     @Singleton
     fun provideAPIService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideRepository(api: ApiService, albumDao: AlbumDao, trackDao: TrackDao, artistDao: ArtistDao):
+            RepositoryHelper = RepositoryImpl(api, albumDao, trackDao, artistDao)
+
+    @Provides
+    @Singleton
+    fun provideNetworkHelper(@ApplicationContext appContext: Context): NetworkHelper = NetworkHelper(appContext)
 }

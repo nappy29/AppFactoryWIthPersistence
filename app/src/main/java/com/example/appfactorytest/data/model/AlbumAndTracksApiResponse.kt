@@ -2,7 +2,7 @@ package com.example.appfactorytest.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class AlbutTracksApiResponse(
+data class AlbumAndTracksApiResponse(
     @SerializedName("album")
     val album: AlbumResponse
 )
