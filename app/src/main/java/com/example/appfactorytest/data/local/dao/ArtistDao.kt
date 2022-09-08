@@ -4,17 +4,21 @@ import androidx.room.*
 import com.example.appfactorytest.data.model.Artist
 
 @Dao
-interface ArtistDao {
+abstract class ArtistDao {
 
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertArtist(artist: Artist)
+    open suspend fun insertArtist(id: Long, artist: Artist){
+        artist.containingAlbumId = id
+        insert(artist)
+    }
 
-    @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllArtists(artists: List<Artist>)
+    @Insert
+    abstract suspend fun insert(artist: Artist)
 
-    @Transaction
+//    @Transaction
+//    @Insert
+//    abstract suspend fun insertAllArtists(artists: List<Artist>)
+
     @Delete
-    suspend fun deleteArtist(artist: Artist)
+    abstract suspend fun deleteArtist(artist: Artist)
 }

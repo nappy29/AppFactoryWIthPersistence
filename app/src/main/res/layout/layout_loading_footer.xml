@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/txtErrorMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Timeout" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtErrorMsg" />
+
+    <Button
+        android:id="@+id/btnRetry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/retry_button"
+        android:background="@color/purple_500"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/txtErrorMsg"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

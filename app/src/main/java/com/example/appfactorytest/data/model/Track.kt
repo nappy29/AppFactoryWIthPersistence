@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName
     )]
 )
 data class Track(
-    @PrimaryKey var track_id:Int,
+    @PrimaryKey(autoGenerate = true) var track_id:Int,
 
     @SerializedName("duration")
     var duration: Long,
@@ -28,7 +28,7 @@ data class Track(
 //    @SerializedName("artist")
 //    var artist: Artist,
 
-    val albumOwnerId: Long
+    var albumOwnerId: Long
 ){
     constructor() : this(0,0,"","", 0)
 }

@@ -1,5 +1,6 @@
 package com.example.appfactorytest.data.model
 
+import com.google.gson.JsonElement
 import com.google.gson.annotations.SerializedName
 
 data class AlbumAndTracksApiResponse(
@@ -19,23 +20,15 @@ data class AlbumResponse(
     @SerializedName("listeners")
     var numOfListeners: Long,
 
-    @SerializedName("tags")
-    var tags: TagObject,
-
     @SerializedName("image")
     var images: List<Image>,
 
     @SerializedName("tracks")
-    var trackObject: TrackObject
-)
-
-data class TagObject(
-    @SerializedName("tag")
-    var tags: List<Tag>
-
+    var trackObject: TrackObject?
 )
 
 data class TrackObject(
+
     @SerializedName("track")
-    var tracks: List<Track>
+    var track: JsonElement?
 )

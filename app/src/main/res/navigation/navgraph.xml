@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/artistListFragment"
         android:name="com.example.appfactorytest.ui.ArtistSearchFragment"
-        android:label="fragment_first"
+        android:label="fragment_2"
         tools:layout="@layout/artist_list_fragment" >
 
         <action
@@ -35,8 +35,8 @@
     <fragment
         android:id="@+id/topAlbumFragment"
         android:name="com.example.appfactorytest.ui.TopAlbumFragment"
-        android:label="fragment_first"
-        tools:layout="@layout/artist_list_fragment" >
+        android:label="fragment_3"
+        tools:layout="@layout/album_list_fragment" >
 
         <action
             android:id="@+id/action_topAlbumFragment_to_detailsFragment"
@@ -45,8 +45,8 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.appfactorytest.ui.ArtistSearchFragment"
-        android:label="fragment_first"
+        android:name="com.example.appfactorytest.ui.DetailsFragment"
+        android:label="fragment_4"
         tools:layout="@layout/details_fragment" >
     </fragment>
 

@@ -4,17 +4,19 @@ import androidx.room.*
 import com.example.appfactorytest.data.model.Track
 
 @Dao
-interface TrackDao {
+abstract class TrackDao {
+
+    @Insert
+    abstract suspend fun insertTrack(track: Track)
 
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTrack(track: Track)
+    open suspend fun insertAllTracks(id: Long,tracks: List<Track>){
+        for (track in tracks){
+            track.albumOwnerId = id
+            insertTrack(track)
+        }
+    }
 
-    @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllTracks(tracks: List<Track>)
-
-    @Transaction
     @Delete
-    suspend fun deleteTrack(track: Track)
+    abstract suspend fun deleteTrack(track: Track)
 }

@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName
     )])
 data class Artist(
 
-    @PrimaryKey var artist_id:Int,
+    @PrimaryKey(autoGenerate = true) var artist_id:Int,
 
     @SerializedName("name")
     var name: String,

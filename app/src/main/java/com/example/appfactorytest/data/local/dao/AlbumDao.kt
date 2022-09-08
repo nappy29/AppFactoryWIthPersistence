@@ -5,21 +5,27 @@ import com.example.appfactorytest.data.model.Album
 import com.example.appfactorytest.data.model.AlbumWithTracks
 
 @Dao
-interface AlbumDao {
+abstract class AlbumDao {
 
     @Transaction
     @Query("SELECT * FROM album")
-    suspend fun getAllAlbumsWithTracksAndArtist(): List<AlbumWithTracks>
+    abstract suspend fun getAllAlbumsWithTracksAndArtist(): List<AlbumWithTracks>
 
-    @Transaction
+    @Query("SELECT * FROM album WHERE album_id =:id")
+    abstract suspend fun getSingleAlbumsWithTracksAndArtist(id: Long): AlbumWithTracks
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAlbum(album: Album): Long
+    abstract suspend fun insertAlbum(album: Album): Long
 
-    @Transaction
+    @Query("SELECT EXISTS (SELECT 1 FROM album WHERE name = :albumName AND url=:url)")
+    abstract suspend fun isAlbumLocallyStored(albumName: String, url: String): Boolean
+
+    @Query("SELECT * FROM album WhERE name=:albumName AND url=:url")
+    abstract suspend fun getSavedAlbumByName(albumName: String, url: String): Album
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllAlbums(albums: List<Album>)
+    abstract suspend fun insertAllAlbums(albums: List<Album>)
 
-    @Transaction
     @Delete
-    suspend fun deleteAlbum(album: Album)
+    abstract suspend fun deleteAlbum(album: Album)
 }

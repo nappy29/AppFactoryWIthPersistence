@@ -9,11 +9,13 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("?method=artist.search&format=json")
-    suspend fun searchByArtist(@Query("artist", encoded = true) artistName: String): Response<ArtistSearchApiResponse>
+    suspend fun searchByArtist(@Query("artist", encoded = true) artistName: String,
+                                @Query("page", encoded = true)page: Int): Response<ArtistSearchApiResponse>
 
 
     @GET("?method=artist.gettopalbums&format=json")
-    suspend fun searchTopAlbumByArtist(@Query("artist", encoded = true) artistName: String): Response<TopAlbumApiResponse>
+    suspend fun searchTopAlbumByArtist(@Query("artist", encoded = true) artistName: String,
+                                       @Query("page", encoded = true)page: Int): Response<TopAlbumApiResponse>
 
 
     @GET("?method=album.getinfo&format=json")

@@ -9,8 +9,8 @@ import com.example.appfactorytest.data.local.dao.TrackDao
 import com.example.appfactorytest.data.local.db.AlbumDatabase
 import com.example.appfactorytest.data.remote.ApiService
 import com.example.appfactorytest.util.NetworkHelper
-import com.example.appfactorytest.viewmodel.repository.RepositoryHelper
-import com.example.appfactorytest.viewmodel.repository.RepositoryImpl
+import com.example.appfactorytest.data.repository.RepositoryHelper
+import com.example.appfactorytest.data.repository.RepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

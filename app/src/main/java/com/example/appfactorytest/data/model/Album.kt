@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "album")
 data class Album(
-    @PrimaryKey var album_id:Int,
+    @PrimaryKey(autoGenerate = true) var album_id:Long,
 
     @ColumnInfo(name = "name")
     @SerializedName("name")

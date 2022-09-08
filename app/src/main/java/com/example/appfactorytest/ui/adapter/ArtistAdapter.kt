@@ -3,6 +3,7 @@ package com.example.appfactorytest.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,7 @@ import com.example.appfactorytest.data.model.Artist
 import com.example.appfactorytest.databinding.SingleAlbumItemBinding
 import com.example.appfactorytest.databinding.SingleArtistItemBinding
 
-class ArtistAdapter(private val onClickListener: OnClickListener): ListAdapter<Artist, ArtistAdapter.ArtistViewHolder>(ArtistDiffUtil()) {
+class ArtistAdapter(private val onClickListener: OnClickListener): PagingDataAdapter<Artist, ArtistAdapter.ArtistViewHolder>(ArtistDiffUtil()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtistViewHolder {
@@ -23,7 +24,7 @@ class ArtistAdapter(private val onClickListener: OnClickListener): ListAdapter<A
     }
 
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        getItem(position)?.let { holder.bind(it) }
     }
 
     inner class ArtistViewHolder(_binding: SingleArtistItemBinding) : RecyclerView.ViewHolder(_binding.root){

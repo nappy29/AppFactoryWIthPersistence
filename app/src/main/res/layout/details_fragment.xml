@@ -13,63 +13,69 @@
 
     </data>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/purple_500"
-            android:layout_marginBottom="@dimen/padding"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/image"/>
+            android:layout_marginBottom="@dimen/padding" />
 
-        <ImageView
-            android:id="@+id/image"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/padding"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:loadImageView="@{albumWithTracks.album.url}"
-            android:background="@drawable/ic_launcher_background"/>
+            android:layout_marginTop="?attr/actionBarSize"
+            android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="@{albumWithTracks.album.name}"
-            android:textSize="24sp"
-            android:paddingTop="@dimen/padding"
-            android:background="#8000"
-            android:textStyle="bold|italic"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/padding"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/padding"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#8000"
+                    android:paddingTop="@dimen/padding"
+                    android:paddingBottom="@dimen/padding5dp"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold|italic"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/image" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/padding"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

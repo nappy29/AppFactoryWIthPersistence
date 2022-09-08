@@ -33,7 +33,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_launcher"
-                app:loadImageView="@{artist.images[0].url}"
+                app:loadImageView="@{artist.images[2].url}"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
