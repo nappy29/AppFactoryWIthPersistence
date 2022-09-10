@@ -1,4 +1,4 @@
-package com.example.appfactorytest.ui.adapter
+package com.example.appfactorytest.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appfactorytest.R
-import com.example.appfactorytest.ui.adapter.LoadStateAdapter.LoadStateViewHolder
+import com.example.appfactorytest.ui.main.adapter.LoadStateAdapter.LoadStateViewHolder
 
 class LoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<LoadStateViewHolder>() {
 

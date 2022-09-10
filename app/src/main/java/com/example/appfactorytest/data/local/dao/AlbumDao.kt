@@ -26,6 +26,6 @@ abstract class AlbumDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertAllAlbums(albums: List<Album>)
 
-    @Delete
-    abstract suspend fun deleteAlbum(album: Album)
+    @Query("DELETE FROM album WHERE name = :albumName AND url=:url")
+    abstract suspend fun deleteAlbum(albumName: String, url: String)
 }

@@ -15,7 +15,10 @@ interface RepositoryHelper {
 
     suspend fun getSavedAlbumByName(album: Album): Album
 
-    suspend fun getAlbumTracks(artistName: String, albumName: String): Response<AlbumAndTracksApiResponse>
+    suspend fun getAlbumTracks(
+        artistName: String,
+        albumName: String
+    ): Response<AlbumAndTracksApiResponse>
 
     suspend fun getAllAlbumsWithTracksAndArtist(): List<AlbumWithTracks>
 

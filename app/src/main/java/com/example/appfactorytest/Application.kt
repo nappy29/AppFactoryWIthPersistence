@@ -1,20 +1,20 @@
 package com.example.appfactorytest
 
 import android.app.Application
-import androidx.hilt.work.HiltWorkerFactory
-import androidx.work.Configuration
+import com.example.appfactorytest.util.NetworkMonitoringUtil
 import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
 
 @HiltAndroidApp
-class Application: Application(), Configuration.Provider{
+class Application : Application() {
 
-    @Inject
-    lateinit var workerFactory: HiltWorkerFactory
+    var mNetworkMonitoringUtil: NetworkMonitoringUtil? = null
+    override fun onCreate() {
+        super.onCreate()
 
-    override fun getWorkManagerConfiguration() =
-        Configuration.Builder()
-            .setWorkerFactory(workerFactory)
-            .setMinimumLoggingLevel(android.util.Log.DEBUG)
-            .build()
+        mNetworkMonitoringUtil = NetworkMonitoringUtil(applicationContext);
+        // Check the network state before registering for the 'networkCallbackEvents'
+        mNetworkMonitoringUtil!!.checkNetworkState();
+        mNetworkMonitoringUtil!!.registerNetworkCallbackEvents()
+
+    }
 }

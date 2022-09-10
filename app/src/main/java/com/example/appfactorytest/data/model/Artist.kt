@@ -3,16 +3,18 @@ package com.example.appfactorytest.data.model
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "artist", foreignKeys = [
-    ForeignKey(
-        entity = Album::class,
-        parentColumns = arrayOf("album_id"),
-        childColumns = arrayOf("containingAlbumId"),
-        onDelete = ForeignKey.CASCADE
-    )])
+@Entity(
+    tableName = "artist", foreignKeys = [
+        ForeignKey(
+            entity = Album::class,
+            parentColumns = arrayOf("album_id"),
+            childColumns = arrayOf("containingAlbumId"),
+            onDelete = ForeignKey.CASCADE
+        )]
+)
 data class Artist(
 
-    @PrimaryKey(autoGenerate = true) var artist_id:Int,
+    @PrimaryKey(autoGenerate = true) var artist_id: Int,
 
     @SerializedName("name")
     var name: String,
@@ -29,6 +31,6 @@ data class Artist(
     var image_url: String,
 
     var containingAlbumId: Long
-){
-    constructor() : this(0,"","",null,"",0)
+) {
+    constructor() : this(0, "", "", null, "", 0)
 }

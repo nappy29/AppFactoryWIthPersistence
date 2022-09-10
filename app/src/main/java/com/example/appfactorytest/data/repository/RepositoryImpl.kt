@@ -5,18 +5,20 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
-import com.example.appfactorytest.data.source.ArtistPagingSource
 import com.example.appfactorytest.data.local.dao.AlbumDao
 import com.example.appfactorytest.data.local.dao.ArtistDao
 import com.example.appfactorytest.data.local.dao.TrackDao
 import com.example.appfactorytest.data.model.*
 import com.example.appfactorytest.data.remote.ApiService
+import com.example.appfactorytest.data.source.ArtistPagingSource
 import com.example.appfactorytest.data.source.TopAlbumPagingSource
 import retrofit2.Response
 import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(private val apiService: ApiService, private val albumDao: AlbumDao,
-        private val trackDao: TrackDao, private val artistDao: ArtistDao): RepositoryHelper {
+class RepositoryImpl @Inject constructor(
+    private val apiService: ApiService, private val albumDao: AlbumDao,
+    private val trackDao: TrackDao, private val artistDao: ArtistDao
+) : RepositoryHelper {
 
 //    override suspend fun searchByArtist(artistName: String): Response<ArtistSearchApiResponse> {
 //        return apiService.searchByArtist(artistName)
@@ -33,8 +35,7 @@ class RepositoryImpl @Inject constructor(private val apiService: ApiService, pri
             ),
             pagingSourceFactory = {
                 ArtistPagingSource(apiService, artistName)
-            }
-            , initialKey = 1
+            }, initialKey = 1
         ).liveData
     }
 
@@ -46,9 +47,8 @@ class RepositoryImpl @Inject constructor(private val apiService: ApiService, pri
                 initialLoadSize = 2
             ),
             pagingSourceFactory = {
-                TopAlbumPagingSource(apiService, artistName)
-            }
-            , initialKey = 1
+                TopAlbumPagingSource(apiService, albumDao, artistName)
+            }, initialKey = 1
         ).liveData
     }
 
@@ -80,11 +80,11 @@ class RepositoryImpl @Inject constructor(private val apiService: ApiService, pri
     }
 
     override suspend fun deleteAlbum(album: Album) {
-        return albumDao.deleteAlbum(album)
+        return albumDao.deleteAlbum(album.name, album.url)
     }
 
     override suspend fun insertAllTracks(id: Long, tracks: List<Track>) {
-        trackDao.insertAllTracks(id,tracks)
+        trackDao.insertAllTracks(id, tracks)
     }
 
     override suspend fun insertArtist(id: Long, artist: Artist) {

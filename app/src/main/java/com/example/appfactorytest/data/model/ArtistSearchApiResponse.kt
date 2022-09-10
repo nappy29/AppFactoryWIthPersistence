@@ -6,6 +6,7 @@ data class ArtistSearchApiResponse(
     @SerializedName("results")
     var results: ArtistResults
 )
+
 data class ArtistResults(
     @SerializedName("artistmatches")
     var artistMatches: ArtistMatches

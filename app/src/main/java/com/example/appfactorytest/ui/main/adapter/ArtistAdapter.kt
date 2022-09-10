@@ -1,18 +1,17 @@
-package com.example.appfactorytest.ui.adapter
+package com.example.appfactorytest.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appfactorytest.R
 import com.example.appfactorytest.data.model.Artist
-import com.example.appfactorytest.databinding.SingleAlbumItemBinding
 import com.example.appfactorytest.databinding.SingleArtistItemBinding
 
-class ArtistAdapter(private val onClickListener: OnClickListener): PagingDataAdapter<Artist, ArtistAdapter.ArtistViewHolder>(ArtistDiffUtil()) {
+class ArtistAdapter(private val onClickListener: OnClickListener) :
+    PagingDataAdapter<Artist, ArtistAdapter.ArtistViewHolder>(ArtistDiffUtil()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtistViewHolder {
@@ -27,7 +26,8 @@ class ArtistAdapter(private val onClickListener: OnClickListener): PagingDataAda
         getItem(position)?.let { holder.bind(it) }
     }
 
-    inner class ArtistViewHolder(_binding: SingleArtistItemBinding) : RecyclerView.ViewHolder(_binding.root){
+    inner class ArtistViewHolder(_binding: SingleArtistItemBinding) :
+        RecyclerView.ViewHolder(_binding.root) {
 
         var binding: SingleArtistItemBinding = _binding
 

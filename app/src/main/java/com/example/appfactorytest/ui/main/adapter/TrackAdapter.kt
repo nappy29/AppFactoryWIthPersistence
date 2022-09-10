@@ -1,4 +1,4 @@
-package com.example.appfactorytest.ui.adapter
+package com.example.appfactorytest.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appfactorytest.R
-import com.example.appfactorytest.data.model.Artist
 import com.example.appfactorytest.data.model.Track
 import com.example.appfactorytest.databinding.SingleTrackBinding
 
@@ -25,7 +24,8 @@ class TrackAdapter : ListAdapter<Track, TrackAdapter.TrackViewHolder>(TrackDiffU
         holder.bind(getItem(position))
     }
 
-    inner class TrackViewHolder(_binding: SingleTrackBinding) : RecyclerView.ViewHolder(_binding.root){
+    inner class TrackViewHolder(_binding: SingleTrackBinding) :
+        RecyclerView.ViewHolder(_binding.root) {
 
         var binding: SingleTrackBinding = _binding
 

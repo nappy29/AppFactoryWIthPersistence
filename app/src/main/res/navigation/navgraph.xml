@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.appfactorytest.ui.mainPage.MainFragment"
+        android:name="com.example.appfactorytest.ui.main.fragments.HomeFragment"
         android:label="fragment_first"
-        tools:layout="@layout/main_fragment_page" >
+        tools:layout="@layout/main_fragment_page">
 
         <action
             android:id="@+id/action_mainFragment_to_artistListFragment"
@@ -20,12 +20,11 @@
     </fragment>
 
 
-
     <fragment
         android:id="@+id/artistListFragment"
-        android:name="com.example.appfactorytest.ui.ArtistSearchFragment"
+        android:name="com.example.appfactorytest.ui.main.fragments.ArtistSearchFragment"
         android:label="fragment_2"
-        tools:layout="@layout/artist_list_fragment" >
+        tools:layout="@layout/artist_list_fragment">
 
         <action
             android:id="@+id/action_artistListFragment_to_topAlbumFragment2"
@@ -36,7 +35,7 @@
         android:id="@+id/topAlbumFragment"
         android:name="com.example.appfactorytest.ui.TopAlbumFragment"
         android:label="fragment_3"
-        tools:layout="@layout/album_list_fragment" >
+        tools:layout="@layout/album_list_fragment">
 
         <action
             android:id="@+id/action_topAlbumFragment_to_detailsFragment"
@@ -45,10 +44,9 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.appfactorytest.ui.DetailsFragment"
+        android:name="com.example.appfactorytest.ui.main.fragments.DetailsFragment"
         android:label="fragment_4"
-        tools:layout="@layout/details_fragment" >
-    </fragment>
+        tools:layout="@layout/details_fragment"></fragment>
 
 
 </navigation>

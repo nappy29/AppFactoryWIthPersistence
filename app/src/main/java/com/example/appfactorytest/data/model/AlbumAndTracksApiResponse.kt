@@ -7,6 +7,7 @@ data class AlbumAndTracksApiResponse(
     @SerializedName("album")
     val album: AlbumResponse
 )
+
 data class AlbumResponse(
     @SerializedName("artist")
     var artistName: String,

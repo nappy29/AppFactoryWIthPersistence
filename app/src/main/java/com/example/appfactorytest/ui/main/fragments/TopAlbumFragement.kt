@@ -1,33 +1,30 @@
 package com.example.appfactorytest.ui
 
 import android.os.Bundle
-import android.util.Log
+import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.appfactorytest.R
 import com.example.appfactorytest.data.model.Album
 import com.example.appfactorytest.data.model.Artist
 import com.example.appfactorytest.databinding.AlbumListFragmentBinding
-import com.example.appfactorytest.ui.adapter.AlbumAdapter
-import com.example.appfactorytest.ui.base.MainActivity
+import com.example.appfactorytest.ui.main.adapter.AlbumAdapter
+import com.example.appfactorytest.ui.main.adapter.LoadStateAdapter
+import com.example.appfactorytest.ui.activity.MainActivity
 import com.example.appfactorytest.util.Status
-import com.example.appfactorytest.viewmodel.MainViewModel
+import com.example.appfactorytest.ui.main.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import android.view.*
-import androidx.lifecycle.lifecycleScope
-import com.example.appfactorytest.ui.adapter.LoadStateAdapter
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class TopAlbumFragment: Fragment() {
+class TopAlbumFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: AlbumListFragmentBinding
@@ -36,7 +33,8 @@ class TopAlbumFragment: Fragment() {
 
     private var searchJob: Job? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.album_list_fragment, container, false)
         return binding.root
@@ -52,8 +50,10 @@ class TopAlbumFragment: Fragment() {
 
         (requireActivity() as? MainActivity)?.setSupportActionBar(binding.toolbar)
 
-        albumAdapter = AlbumAdapter(AlbumAdapter.OnAlbumItemClickListener{
+        albumAdapter = AlbumAdapter(AlbumAdapter.OnAlbumItemClickListener {
             onAlbumItemclick(it)
+        }, AlbumAdapter.FavoriteButtonClickListener { isLocal, album ->
+            favoriteClicked(isLocal, album)
         })
         binding.recyclerView.apply {
             itemAnimator = DefaultItemAnimator()
@@ -76,38 +76,33 @@ class TopAlbumFragment: Fragment() {
         binding.toolbar.setTitleTextColor(resources.getColor(R.color.white))
 
     }
-        private fun setUpObservers() {
-        viewModel.singleArtistObject.observe(viewLifecycleOwner, {
-             if(it != null) {
-                 artist=it
-                 binding.toolbar.title = "${it.name}'s Top Albums"
-//                 viewModel.topAlbumSearch(it.name)
-                 Search_Name = it.name
 
-                 searchJob?.cancel()
-                 searchJob = lifecycleScope.launch {
-                     viewModel.topAlbumSearch(Search_Name).observe(viewLifecycleOwner, {
-                         albumAdapter.submitData(lifecycle, it)
-                     })
-                 }
-
-             }
+    private fun setUpObservers() {
+        viewModel.statusLiveData.observe(viewLifecycleOwner, {
+            when (it.status) {
+                Status.LOADING -> binding.progressCircular.visibility = View.VISIBLE
+                Status.ERROR -> {
+                    binding.progressCircular.visibility = View.GONE
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                }
+            }
         })
 
-//        viewModel.topAlbumSearchResponse.observe(viewLifecycleOwner, {
-//            when(it.status){
-//                Status.SUCCESS ->{
-//                    it.data?.get(0)?.let { it1 -> Log.e("artist", it1.url) }
-//                    albumAdapter.submitList(it.data)
-//                }
-//                Status.LOADING ->{
-//
-//                }
-//                Status.ERROR ->{
-//
-//                }
-//            }
-//        })
+        viewModel.singleArtistObject.observe(viewLifecycleOwner, {
+            if (it != null) {
+                artist = it
+                binding.toolbar.title = "${it.name}'s Top Albums"
+                Artist_name = it.name
+
+                searchJob?.cancel()
+                searchJob = lifecycleScope.launch {
+                    viewModel.topAlbumSearch(Artist_name)?.observe(viewLifecycleOwner, {
+                        albumAdapter.submitData(lifecycle, it)
+                    })
+                }
+
+            }
+        })
 
     }
 
@@ -117,14 +112,19 @@ class TopAlbumFragment: Fragment() {
         menuItem.setVisible(false)
     }
 
-    fun onAlbumItemclick(album: Album){
+    fun onAlbumItemclick(album: Album) {
         viewModel.getAlbumTracks(artist.name, album)
-//        Navigation.findNavController(requireActivity(),R.id.nav_host_fragment).navigate(R.id.action_topAlbumFragment_to_detailsFragment)
-
         findNavController().navigate(R.id.action_topAlbumFragment_to_detailsFragment)
     }
 
-    companion object{
-        var Search_Name = ""
+    fun favoriteClicked(isLocal: Boolean, album: Album) {
+        if (isLocal)
+            viewModel.deleteAlbum(album)
+        else
+            viewModel.getAlbumTracks(Artist_name, album)
+    }
+
+    companion object {
+        var Artist_name = ""
     }
 }

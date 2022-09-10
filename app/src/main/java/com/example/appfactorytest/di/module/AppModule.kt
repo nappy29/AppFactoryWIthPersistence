@@ -8,9 +8,9 @@ import com.example.appfactorytest.data.local.dao.ArtistDao
 import com.example.appfactorytest.data.local.dao.TrackDao
 import com.example.appfactorytest.data.local.db.AlbumDatabase
 import com.example.appfactorytest.data.remote.ApiService
-import com.example.appfactorytest.util.NetworkHelper
 import com.example.appfactorytest.data.repository.RepositoryHelper
 import com.example.appfactorytest.data.repository.RepositoryImpl
+import com.example.appfactorytest.util.NetworkHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -82,7 +82,6 @@ class AppModule {
     }
 
 
-
     @Singleton
     @Provides
     fun provideConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
@@ -106,10 +105,16 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(api: ApiService, albumDao: AlbumDao, trackDao: TrackDao, artistDao: ArtistDao):
+    fun provideRepository(
+        api: ApiService,
+        albumDao: AlbumDao,
+        trackDao: TrackDao,
+        artistDao: ArtistDao
+    ):
             RepositoryHelper = RepositoryImpl(api, albumDao, trackDao, artistDao)
 
     @Provides
     @Singleton
-    fun provideNetworkHelper(@ApplicationContext appContext: Context): NetworkHelper = NetworkHelper(appContext)
+    fun provideNetworkHelper(@ApplicationContext appContext: Context): NetworkHelper =
+        NetworkHelper(appContext)
 }
