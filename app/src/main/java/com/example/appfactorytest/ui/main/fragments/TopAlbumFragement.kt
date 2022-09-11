@@ -103,7 +103,6 @@ class TopAlbumFragment : Fragment() {
 
             }
         })
-
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -113,6 +112,7 @@ class TopAlbumFragment : Fragment() {
     }
 
     fun onAlbumItemclick(album: Album) {
+        viewModel.setalbumithTracksObject(null)
         viewModel.getAlbumTracks(artist.name, album)
         findNavController().navigate(R.id.action_topAlbumFragment_to_detailsFragment)
     }

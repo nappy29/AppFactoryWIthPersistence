@@ -28,9 +28,9 @@ class MainViewModel @Inject constructor(private val repositoryHelper: Repository
     val albumAndTrackSearchResponse: LiveData<Resource<List<Track>>>
         get() = _albumAndTrackSearchResponse
 
-    private val _albumAndTrackObject = MutableLiveData<AlbumWithTracks>()
+    private val _albumAndTrackObject = MutableLiveData<AlbumWithTracks?>()
 
-    val albumAndTrackObject: LiveData<AlbumWithTracks>
+    val albumAndTrackObject: MutableLiveData<AlbumWithTracks?>
         get() = _albumAndTrackObject
 
     private val _singleArtistObject = MutableLiveData<Artist>()
@@ -192,7 +192,7 @@ class MainViewModel @Inject constructor(private val repositoryHelper: Repository
         var _album = Album()
         _album.name = album.name
         _album.url = albumResponseObject.url
-        _album.image_url = albumResponseObject.images[1].url
+        _album.image_url = albumResponseObject.images[2].url
 
         _album.artist = album.artist
 
@@ -203,7 +203,7 @@ class MainViewModel @Inject constructor(private val repositoryHelper: Repository
         _singleArtistObject.postValue(artist)
     }
 
-    fun setalbumithTracksObject(albumWithTracks: AlbumWithTracks) {
+    fun setalbumithTracksObject(albumWithTracks: AlbumWithTracks?) {
         _statusLiveData.postValue(Resource.loading(null))
         _albumAndTrackObject.postValue(albumWithTracks)
         _statusLiveData.postValue(Resource.success(null))

@@ -42,7 +42,7 @@ class AlbumAdapter(
             binding.text.text = album.name
 
             if (album.imageList != null)
-                album.imageList?.get(0)?.let { loadImageView(binding.image, it.url) }
+                album.imageList?.get(2)?.let { loadImageView(binding.image, it.url) }
             else
                 loadImageView(binding.image, album.image_url)
 
